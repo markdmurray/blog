@@ -20,3 +20,5 @@ There are 3 things we need to configure:
     NOTE: This can be an ENI or a NLB
 - Mirror Filter: Where we can configure what network traffic we allow or reject based on source/dest and protocol.
 - Mirror Session: Essentially joins the above together, limited to one target.
+
+First we'll set up the mirror target:
