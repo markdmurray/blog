@@ -22,3 +22,5 @@ There are 3 things we need to configure:
 - Mirror Session: Essentially joins the above together, limited to one target.
 
 First we'll set up the mirror target:
+
+![Creating our mirror target](/assets/images/traffic_mirror_target.png)
