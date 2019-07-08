@@ -24,3 +24,14 @@ There are 3 things we need to configure:
 First we'll set up the mirror target:
 
 ![Creating our mirror target](/assets/images/traffic_mirror_target.png)
+
+Second we create our mirror filter, here we set destination port as the port we want to capture(8080 in this case) and source port as any.
+
+![Traffic Mirror Filter](/assets/images/traffic_mirror_filter.png)
+![Traffic Mirror Filter rules](/assets/images/traffic_mirror_filter_rule.png)
+
+Once our filters are set, we just need to create a session which combines our target and filter we just set up.
+
+![Traffic Mirror Session](/assets/images/traffic_mirror_session.png)
+
+With these setup, lets gain shell access to the target via Session Manager and take a look at our mirrored packets via Tcpdump.
