@@ -5,13 +5,13 @@ date:   2019-07-08 07:00:00 +1000
 categories: AWS
 ---
 
-AWS recently released a new feature called "VPC Traffic Mirroring" which is essentially port mirroring[1] and allows AWS customers to do deep packet inspections without the use of forwarders on your EC2 instances.
+AWS recently released a new feature called "VPC Traffic Mirroring" which allows you to forwrd or "mirror" traffic from an ENI, to a destination(ENI) of your choosing.[1] You might ask "whats the difference between this and vpc flow logs?" and the answer would be, a lot!.
 
-This also differs from VPC flow logs, in that you get full packets rather than metadata.
+VPC flow logs only provides metadata which is largly concernred with port,source and destination IP addresses, wheter the traffic was allowed or denied. Whereas this feature provides full packets which includes the payload.
 
-In the following blog post I simply setup a test environment where I have one EC2 instance running Jenkins, and another EC2 instance running the latest AL2, which will act as the destination for packets. The idea is to forward all web traffic from Jenkins, to the destination instance.
+So in the following blog post I simply setup a test environment where I have one EC2 instance running Jenkins, and another EC2 instance running the latest AL2, which will act as the destination for packets. The idea is to forward all web traffic from Jenkins, to the destination instance.
 
-Ensure that you have port 4789(UDP) allowed on your destination instance, before continuing to configure VPC Traffic Mirroring.
+Before we start, ensure that you have port 4789(UDP) allowed on your destination instance, before continuing to configure VPC Traffic Mirroring. I'm going to assume you already know about setting up Security Groups and ACLS, I also used an extra ENI attached at the destination, but is not required.
 
 There are 3 things we need to configure:
 
