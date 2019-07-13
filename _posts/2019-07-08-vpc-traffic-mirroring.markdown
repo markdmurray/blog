@@ -35,3 +35,18 @@ Once our filters are set, we just need to create a session which combines our ta
 ![Traffic Mirror Session](/assets/images/traffic_mirror_session.png)
 
 With these setup, lets gain shell access to the target via Session Manager and take a look at our mirrored packets via Tcpdump.
+
+First I'll do a simple curl to our EC2 instance, which will allow us(if we configured it right) to see our mirrored VPC traffic on the destination instance.
+
+![Curl with terminal](/assets/images/curl.jpg)
+
+Everything going well, we should see our mirrored traffic via tcpdump, arriving encapsualted in a VXLAN encapsulated packet.
+
+![TCPdump on destination](/assests/images/tcpdump.png)
+
+We can take a closer look with wireshark, to see the actual contents of the packets. As you can see there full packet captures and you can no doubt the how powerful this feature is.
+
+In another post, I'll go over some of the things we can do this information.
+
+![wireshark output](/assets/images/wireshark.png)
+
