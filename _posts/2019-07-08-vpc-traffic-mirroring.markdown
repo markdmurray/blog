@@ -9,9 +9,11 @@ AWS recently released a new feature called "VPC Traffic Mirroring" which allows 
 
 VPC flow logs only provides metadata which is largly concernred with port,source and destination IP addresses, wheter the traffic was allowed or denied. Whereas this feature provides full packets which includes the payload.
 
+Packets are delivered to the destination instance or NLB using VXLAN encapsulation. 
+
 So in the following blog post I simply setup a test environment where I have one EC2 instance running Jenkins, and another EC2 instance running the latest AL2, which will act as the destination for packets. The idea is to forward all web traffic from Jenkins, to the destination instance.
 
-Before we start, ensure that you have port 4789(UDP) allowed on your destination instance, before continuing to configure VPC Traffic Mirroring. I'm going to assume you already know about setting up Security Groups and ACLS, I also used an extra ENI attached at the destination, but is not required.
+Before we start, ensure that you have port 4789 UDP(VXLAN) allowed on your destination instance, before continuing to configure VPC Traffic Mirroring. I'm going to assume you already know about setting up Security Groups and ACLS, I also used an extra ENI attached at the destination, but this configuration is not required.
 
 There are 3 things we need to configure:
 
@@ -42,7 +44,7 @@ First I'll do a simple curl to our EC2 instance, which will allow us(if we confi
 
 Everything going well, we should see our mirrored traffic via tcpdump, arriving encapsualted in a VXLAN encapsulated packet.
 
-![TCPdump on destination](/assests/images/tcpdump.png)
+![TCPdump on destination](/assets/images/tcpdump.png)
 
 We can take a closer look with wireshark, to see the actual contents of the packets. As you can see there full packet captures and you can no doubt the how powerful this feature is.
 
